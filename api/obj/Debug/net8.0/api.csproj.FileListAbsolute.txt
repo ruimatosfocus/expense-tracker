@@ -31,3 +31,4 @@
 /Users/ruimatos/projetos/expense-tracker/api/obj/Debug/net8.0/api.pdb
 /Users/ruimatos/projetos/expense-tracker/api/obj/Debug/net8.0/api.genruntimeconfig.cache
 /Users/ruimatos/projetos/expense-tracker/api/obj/Debug/net8.0/ref/api.dll
+/Users/ruimatos/projetos/expense-tracker/api/obj/Debug/net8.0/api.sourcelink.json
