@@ -1,0 +1,38 @@
+.title {
+  color: #8e8e89;
+}
+
+.register-link {
+  color: #8e8e89;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  padding: 24px;
+  width: 350px;
+  margin: 50px auto; /* Centers the container horizontally and vertically */
+  background-color: white; /* White background for the form */
+  border: 2px solid #ccc; /* Gray border for separation */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%; /* Full width inside the container */
+}
+
+.form-field {
+  width: 100%;
+}
+
+.error-snackbar {
+  background-color: #f44336; /* Red for error */
+  color: white;
+}

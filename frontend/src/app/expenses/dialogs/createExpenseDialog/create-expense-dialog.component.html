@@ -1,0 +1,74 @@
+<h2 mat-dialog-title>Create Expense</h2>
+<form #createForm="ngForm" (ngSubmit)="onSubmit(createForm)">
+  <mat-dialog-content>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <input
+        matInput
+        #description="ngModel"
+        name="description"
+        [(ngModel)]="expense.description"
+        required
+      />
+      <mat-error *ngIf="createForm.submitted && description.invalid">
+        Description is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Amount</mat-label>
+      <input
+        matInput
+        #amount="ngModel"
+        type="number"
+        name="amount"
+        [(ngModel)]="expense.amount"
+        required
+      />
+      <mat-error *ngIf="createForm.submitted && amount.invalid">
+        Amount is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Category</mat-label>
+      <mat-select
+        name="category"
+        [(ngModel)]="expense.category"
+        required
+        #category="ngModel"
+      >
+        <mat-option
+          *ngFor="let category of categories"
+          [value]="category.value"
+        >
+          {{ category.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="createForm.submitted && category.invalid">
+        Category is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Payment Method</mat-label>
+      <mat-select
+        #paymentMethod="ngModel"
+        name="paymentMethod"
+        [(ngModel)]="expense.paymentMethod"
+        required
+      >
+        <mat-option
+          *ngFor="let method of paymentMethods"
+          [value]="method.value"
+        >
+          {{ method.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="createForm.submitted && paymentMethod.invalid">
+        Payment Method is required.
+      </mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">Create</button>
+  </mat-dialog-actions>
+</form>

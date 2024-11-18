@@ -1,0 +1,201 @@
+<div *ngIf="isLoading" class="loading">Loading expenses...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+<ng-container *ngIf="!isLoading && !error">
+  <button mat-raised-button class="create-button" (click)="create()">
+    Create an expense
+  </button>
+  <button mat-raised-button class="pie-button" (click)="pie()">
+    See the pie
+  </button>
+  <p-table
+    [value]="expenses"
+    dataKey="id"
+    editMode="row"
+    class="expenses-table"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Category</th>
+        <th>Payment Method</th>
+        <th>Created</th>
+        <th>Last modified</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template
+      pTemplate="body"
+      let-expense
+      let-editing="editing"
+      let-ri="rowIndex"
+    >
+      <tr
+        [pEditableRow]="expense"
+        #rowForm="ngModelGroup"
+        ngModelGroup="row_{{ ri }}"
+      >
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <mat-form-field>
+                <input
+                  matInput
+                  pInputText
+                  #description="ngModel"
+                  pInputText
+                  name="description"
+                  [(ngModel)]="expense.description"
+                  required
+                />
+              </mat-form-field>
+              <mat-error *ngIf="description.invalid">
+                Description is required.
+              </mat-error>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ expense.description }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  #amount="ngModel"
+                  name="amount"
+                  [(ngModel)]="expense.amount"
+                  required
+                />
+              </mat-form-field>
+              <mat-error *ngIf="amount.invalid">
+                Amount is required.
+              </mat-error>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ expense.amount | currency : "EUR" }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <mat-form-field>
+                <mat-select
+                  [(ngModel)]="expense.category.id"
+                  name="category"
+                  required
+                >
+                  <mat-option
+                    *ngFor="let category of categories"
+                    [value]="category.value"
+                  >
+                    {{ category.label }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ expense.category.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <mat-form-field>
+                <mat-select
+                  [(ngModel)]="expense.paymentMethod"
+                  name="paymentMethod"
+                  required
+                >
+                  <mat-option
+                    *ngFor="let method of paymentMethodValues"
+                    [value]="method.value"
+                  >
+                    {{ method.value }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ expense.paymentMethod }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              {{ expense.created | date : "dd/MM/yyyy" }}
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ expense.created | date : "dd/MM/yyyy" }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              {{ expense.lastModified | date : "dd/MM/yyyy" }}
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ expense.lastModified | date : "dd/MM/yyyy" }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              *ngIf="!editing"
+              [disabled]="isEditing"
+              pButton
+              pRipple
+              pInitEditableRow
+              type="button"
+              icon="pi pi-pencil"
+              (click)="onRowEditInit(expense)"
+              class="p-button-rounded p-button-text"
+            ></button>
+            <button
+              *ngIf="!editing"
+              [disabled]="isEditing"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-text p-button-icon-only p-button-danger"
+              (click)="deleteExpense(expense)"
+              pTooltip="Delete"
+              tooltipPosition="bottom"
+            ></button>
+            <!-- save -->
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              type="button"
+              pSaveEditableRow
+              icon="pi pi-check"
+              (click)="onRowEditSave(expense, ri, rowForm)"
+              class="p-button-rounded p-button-text"
+            ></button>
+            <!-- cancel -->
+            <button
+              *ngIf="editing"
+              pButton
+              pRipple
+              pCancelEditableRow
+              type="button"
+              icon="pi pi-times"
+              (click)="onRowEditCancel(expense, ri)"
+              class="p-button-rounded p-button-text"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>

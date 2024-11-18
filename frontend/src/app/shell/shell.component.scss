@@ -1,0 +1,34 @@
+.navbar {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+  padding: 0 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+
+  .greeting {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  button {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: capitalize;
+    background-color: #ff4081;
+    color: #ffffff;
+
+    &:hover {
+      background-color: #f50057;
+    }
+  }
+}
+
+.content {
+  margin-top: 25px;
+}

@@ -1,0 +1,13 @@
+::ng-deep .mat-dialog-container {
+  width: calc(50vh);
+}
+
+.title {
+  text-align: center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

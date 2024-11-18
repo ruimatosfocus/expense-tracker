@@ -1,0 +1,43 @@
+.expenses-table {
+  width: 100%;
+  margin: 20px 0;
+
+  .p-button-rounded {
+    margin-right: 5px;
+  }
+
+  th {
+    background-color: #f4f4f4;
+    text-align: left;
+    padding: 10px;
+    font-weight: bold;
+  }
+
+  td {
+    padding: 10px;
+  }
+}
+
+.create-button {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: #0074d9;
+  color: #ffffff;
+  margin: 0px 0px 16px 16px;
+
+  &:hover {
+    background-color: #005bb5;
+  }
+}
+
+.pie-button {
+  font-size: 14px;
+  font-weight: bold;
+  background-color: orange;
+  color: #ffffff;
+  margin: 0px 0px 16px 16px;
+
+  &:hover {
+    background-color: darkorange;
+  }
+}
